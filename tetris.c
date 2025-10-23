@@ -26,3 +26,24 @@ void exibirFila(Peca fila[], int frente, int tras, int quantidade) {
     printf("]\n");
 }
 
+int main() {
+    Peca fila[TAMANHO_FILA];
+    int frente = 0;         // Início da fila
+    int tras = 0;           // Fim da fila
+    int quantidade = 0;     // Número de elementos atuais
+    int idAtual = 0;
+    int opcao;
+
+    srand(time(NULL)); 
+
+    // Inicializa a fila com 5 peças
+    for (int i = 0; i < TAMANHO_FILA; i++) {
+        fila[i] = gerarPeca(idAtual++);
+        quantidade++;
+        tras = (tras + 1) % TAMANHO_FILA;
+    }
+
+    printf("=== Tetris Stack - Fila de Peças Futuras ===\n");
+    exibirFila(fila, frente, tras, quantidade);
+
+    
