@@ -46,4 +46,45 @@ int main() {
     printf("=== Tetris Stack - Fila de Peças Futuras ===\n");
     exibirFila(fila, frente, tras, quantidade);
 
-    
+    do {
+        printf("\nOpções:\n");
+        printf("1 - Jogar peça (dequeue)\n");
+        printf("2 - Inserir nova peça (enqueue)\n");
+        printf("0 - Sair\n");
+        printf("Escolha: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                if (quantidade > 0) {
+                    printf("\nPeça jogada: %c %d\n", fila[frente].nome, fila[frente].id);
+                    frente = (frente + 1) % TAMANHO_FILA;
+                    quantidade--;
+                } else {
+                    printf("\nA fila está vazia!\n");
+                }
+                exibirFila(fila, frente, tras, quantidade);
+                break;
+
+            case 2:
+                if (quantidade < TAMANHO_FILA) {
+                    fila[tras] = gerarPeca(idAtual++);
+                    tras = (tras + 1) % TAMANHO_FILA;
+                    quantidade++;
+                } else {
+                    printf("\nA fila está cheia!\n");
+                }
+                exibirFila(fila, frente, tras, quantidade);
+                break;
+
+            case 0:
+                printf("\nSaindo do programa...\n");
+                break;
+
+            default:
+                printf("\nOpção inválida!\n");
+        }
+    } while (opcao != 0);
+
+    return 0;
+}
